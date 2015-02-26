@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="csslint" default="csslint:check-dir">
+
+  <!-- ## Properties -->
+
+  <property name="csslint.bin"        value="/usr/local/bin/csslint" />
+  <property name="csslint.cmd"        value="${csslint.bin}" />
+  <property name="csslint.files.dir"  value="" />
+  <property name="csslint.report.dir" value="" />
+
+  <!-- ## Targets -->
+
+  <target name="csslint:check-dir"
+          description="Checks code against CSS Lint.">
+    <fail unless="csslint.files.dir"
+          message="Please provide a csslint.files.dir property." />
+
+    <foreach target="csslint:check-file" param="filename" absparam="absfilename">
+      <fileset dir="${csslint.files.dir}">
+        <include name="**/*.css" />
+        <exclude name="**/*.min.css" />
+      </fileset>
+    </foreach>
+  </target>
+
+  <target name="csslint:check-file"
+          description="CSS Lint a single file.">
+    <fail unless="csslint.report.dir"
+          message="Please provide a csslint.report.dir property." />
+
+    <echo msg="Linting file: ${absfilename}" />
+
+    <exec command="${csslint.cmd} --format=checkstyle-xml ${absfilename}"
+          outputProperty="csslint.report.output" />
+
+    <php function="str_replace" returnProperty="csslint.report.filename">
+      <param value="/" />
+      <param value="-" />
+      <param value="${filename}" />
+    </php>
+
+    <property name="csslint.report.file" value="${csslint.report.dir}/checkstyle-csslint-${csslint.report.filename}.xml" />
+    <append text="${csslint.report.output}" destFile="${csslint.report.file}" />
+
+    <property name="csslint.report.errors" value="${csslint.report.output}">
+      <filterchain>
+        <linecontainsregexp>
+          <regexp pattern='(severity="error")' ignoreCase="true" />
+        </linecontainsregexp>
+      </filterchain>
+    </property>
+
+    <if>
+      <not>
+        <equals arg1="${csslint.report.errors}" arg2="" />
+      </not>
+      <then>
+        <fail message="CSS error detected in file ${absfilename}." />
+      </then>
+    </if>
+  </target>
+
+</project>

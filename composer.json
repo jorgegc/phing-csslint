@@ -1,0 +1,11 @@
+{
+    "name": "jorgegc/phing-csslint",
+    "description": "A collection of targets for CSS Lint.",
+    "type": "library",
+    "keywords": [
+        "phing",
+        "csslint"
+    ],
+    "license": "GPL-2.0+",
+    "minimum-stability": "dev"
+}
