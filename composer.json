@@ -1,6 +1,6 @@
 {
     "name": "jorgegc/phing-csslint",
-    "description": "A collection of targets for CSS Lint.",
+    "description": "A collection of CSS Lint targets for Phing.",
     "type": "library",
     "keywords": [
         "phing",

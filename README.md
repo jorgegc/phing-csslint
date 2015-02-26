@@ -3,7 +3,7 @@ Phing CSS Lint
 
 ## Overview
 
-A collection of targets for CSS Lint.
+A collection of CSS Lint targets for Phing.
 
 ## Installation
 
