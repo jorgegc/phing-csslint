@@ -11,8 +11,21 @@
 
   <!-- ## Targets -->
 
+  <target name="csslint:init"
+          description="Creates the CSS Lint report folder."
+          unless="csslint.initialized"
+          hidden="true">
+    <fail unless="csslint.report.dir"
+          message="Please provide a csslint.report.dir property." />
+
+    <mkdir dir="${csslint.report.dir}" />
+
+    <property name="csslint.initialized" value="true" />
+  </target>
+
   <target name="csslint:check-dir"
-          description="Checks code against CSS Lint.">
+          description="Checks code against CSS Lint."
+          depends="csslint:init">
     <fail unless="csslint.files.dir"
           message="Please provide a csslint.files.dir property." />
 
@@ -25,7 +38,8 @@
   </target>
 
   <target name="csslint:check-file"
-          description="CSS Lint a single file.">
+          description="CSS Lint a single file."
+          depends="csslint:init">
     <fail unless="csslint.report.dir"
           message="Please provide a csslint.report.dir property." />
 
