@@ -4,8 +4,6 @@
 
   <!-- ## Properties -->
 
-  <property name="csslint.bin"        value="/usr/local/bin/csslint" />
-  <property name="csslint.cmd"        value="${csslint.bin}" />
   <property name="csslint.files.dir"  value="" />
   <property name="csslint.report.dir" value="" />
 
@@ -45,7 +43,7 @@
 
     <echo msg="Linting file: ${absfilename}" />
 
-    <exec command="${csslint.cmd} --format=checkstyle-xml ${absfilename}"
+    <exec command="csslint --format=checkstyle-xml ${absfilename}"
           outputProperty="csslint.report.output" />
 
     <php function="str_replace" returnProperty="csslint.report.filename">
