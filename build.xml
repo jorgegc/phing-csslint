@@ -5,19 +5,15 @@
   <!-- ## Properties -->
 
   <property name="csslint.files.dir"  value="" />
-  <property name="csslint.report.dir" value="" />
+  <property name="csslint.report.dir" value="${project.basedir}/build/logs/csslint" />
 
   <!-- ## Targets -->
 
   <target name="csslint:init"
-          description="Creates the CSS Lint report folder."
+          description="Setup steps for CSS Lint build tasks."
           unless="csslint.initialized"
           hidden="true">
-    <fail unless="csslint.report.dir"
-          message="Please provide a csslint.report.dir property." />
-
     <mkdir dir="${csslint.report.dir}" />
-
     <property name="csslint.initialized" value="true" />
   </target>
 
@@ -38,9 +34,6 @@
   <target name="csslint:check-file"
           description="CSS Lint a single file."
           depends="csslint:init">
-    <fail unless="csslint.report.dir"
-          message="Please provide a csslint.report.dir property." />
-
     <echo msg="Linting file: ${absfilename}" />
 
     <exec command="csslint --format=checkstyle-xml ${absfilename}"
