@@ -22,7 +22,6 @@
           depends="csslint:init">
     <fail unless="csslint.files.dir"
           message="Please provide a csslint.files.dir property." />
-
     <foreach target="csslint:check-file" param="filename" absparam="absfilename">
       <fileset dir="${csslint.files.dir}">
         <include name="**/*.css" />
