@@ -4,6 +4,7 @@
 
   <!-- ## Properties -->
 
+  <property name="csslint.bin"        value="${project.basedir}/node_modules/.bin/csslint" />
   <property name="csslint.files.dir"  value="" />
   <property name="csslint.report.dir" value="${project.basedir}/build/logs/csslint" />
 
@@ -35,7 +36,7 @@
           depends="csslint:init">
     <echo msg="Linting file: ${absfilename}" />
 
-    <exec command="csslint --format=checkstyle-xml ${absfilename}"
+    <exec command="${csslint.bin} --format=checkstyle-xml ${absfilename}"
           outputProperty="csslint.report.output" />
 
     <php function="str_replace" returnProperty="csslint.report.filename">

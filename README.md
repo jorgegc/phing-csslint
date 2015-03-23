@@ -9,9 +9,6 @@ A collection of CSS Lint targets for Phing.
 
 This project can be checked out with Composer.
 
-Please note that this project assumes that CSS Lint is installed globally via
-npm.
-
 ```
 "require": {
     "jorgegc/phing-csslint": "*"
