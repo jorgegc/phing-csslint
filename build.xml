@@ -36,7 +36,7 @@
           depends="csslint:init">
     <echo msg="Linting file: ${absfilename}" />
 
-    <exec command="${csslint.bin} --format=checkstyle-xml ${absfilename}"
+    <exec command="${csslint.bin} --format=junit-xml ${absfilename}"
           outputProperty="csslint.report.output" />
 
     <php function="str_replace" returnProperty="csslint.report.filename">
@@ -45,25 +45,8 @@
       <param value="${filename}" />
     </php>
 
-    <property name="csslint.report.file" value="${csslint.report.dir}/checkstyle-csslint-${csslint.report.filename}.xml" />
-    <append text="${csslint.report.output}" destFile="${csslint.report.file}" />
-
-    <property name="csslint.report.errors" value="${csslint.report.output}">
-      <filterchain>
-        <linecontainsregexp>
-          <regexp pattern='(severity="error")' ignoreCase="true" />
-        </linecontainsregexp>
-      </filterchain>
-    </property>
-
-    <if>
-      <not>
-        <equals arg1="${csslint.report.errors}" arg2="" />
-      </not>
-      <then>
-        <fail message="CSS error detected in file ${absfilename}." />
-      </then>
-    </if>
+    <append text="${csslint.report.output}"
+            destFile="${csslint.report.dir}/csslint-${csslint.report.filename}.xml" />
   </target>
 
 </project>
