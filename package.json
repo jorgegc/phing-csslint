@@ -1,12 +1,12 @@
 {
-  "name": "Phing CSS Lint",
-  "version": "0.0.1",
-  "description": "A collection of CSS Lint targets for Phing.",
-  "dependencies": {},
-  "devDependencies": {
-    "csslint": "~0.10.0"
-  },
-  "engines": {
-    "node": ">=0.8.0"
-  }
+    "name": "Phing CSS Lint",
+    "version": "0.0.1",
+    "description": "A collection of CSS Lint targets for Phing.",
+    "dependencies": {},
+    "devDependencies": {
+        "csslint": "~0.10.0"
+    },
+    "engines": {
+        "node": ">=0.8.0"
+    }
 }
