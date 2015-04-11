@@ -21,8 +21,6 @@
   <target name="csslint:check-dir"
           description="Checks code against CSS Lint."
           depends="csslint:init">
-    <fail unless="csslint.files.dir"
-          message="Please provide a csslint.files.dir property." />
     <foreach target="csslint:check-file" param="filename" absparam="absfilename">
       <fileset dir="${csslint.files.dir}">
         <include name="**/*.css" />
@@ -33,7 +31,7 @@
 
   <target name="csslint:check-file"
           description="CSS Lint a single file."
-          depends="csslint:init">
+          hidden="true">
     <echo msg="Linting file: ${absfilename}" />
 
     <exec command="${csslint.bin} --format=junit-xml ${absfilename}"
