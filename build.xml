@@ -12,15 +12,19 @@
 
   <target name="csslint:init"
           description="Setup steps for CSS Lint build tasks."
-          unless="csslint.initialized"
           hidden="true">
     <mkdir dir="${csslint.report.dir}" />
-    <property name="csslint.initialized" value="true" />
   </target>
 
   <target name="csslint:check-dir"
           description="Checks code against CSS Lint."
           depends="csslint:init">
+    <if>
+      <equals arg1="${csslint.files.dir}" arg2="" />
+      <then>
+        <fail message="Please provide a csslint.files.dir property." />
+      </then>
+    </if>
     <foreach target="csslint:check-file" param="filename" absparam="absfilename">
       <fileset dir="${csslint.files.dir}">
         <include name="**/*.css" />
@@ -32,8 +36,6 @@
   <target name="csslint:check-file"
           description="CSS Lint a single file."
           hidden="true">
-    <echo msg="Linting file: ${absfilename}" />
-
     <exec command="${csslint.bin} --format=junit-xml ${absfilename}"
           outputProperty="csslint.report.output" />
 
