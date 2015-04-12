@@ -10,21 +10,17 @@
 
   <!-- ## Targets -->
 
-  <target name="csslint:init"
-          description="Setup steps for CSS Lint build tasks."
-          hidden="true">
-    <mkdir dir="${csslint.report.dir}" />
-  </target>
-
   <target name="csslint:check-dir"
-          description="Checks code against CSS Lint."
-          depends="csslint:init">
+          description="Checks code against CSS Lint.">
     <if>
       <equals arg1="${csslint.files.dir}" arg2="" />
       <then>
         <fail message="Please provide a csslint.files.dir property." />
       </then>
     </if>
+
+    <mkdir dir="${csslint.report.dir}" />
+
     <foreach target="csslint:check-file" param="filename" absparam="absfilename">
       <fileset dir="${csslint.files.dir}">
         <include name="**/*.css" />
