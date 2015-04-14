@@ -1,11 +1,14 @@
 {
     "name": "jorgegc/phing-csslint",
     "description": "A collection of CSS Lint targets for Phing.",
-    "type": "library",
     "keywords": [
         "phing",
         "csslint"
     ],
+    "homepage": "https://github.com/jorgegc/phing-csslint",
     "license": "GPL-2.0+",
-    "minimum-stability": "dev"
+    "support": {
+        "issues": "https://github.com/jorgegc/phing-csslint",
+        "source": "https://github.com/jorgegc/phing-csslint"
+    }
 }
